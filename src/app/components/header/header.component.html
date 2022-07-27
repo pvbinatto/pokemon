@@ -1,0 +1,19 @@
+<header>
+  <div class="container">
+    <div class="title" [routerLink]="'/'" style="cursor: pointer">
+      {{ title }}
+    </div>
+    <div class="subtitle">{{ subtitle }}</div>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div class="search-bar">
+        <input
+          type="text"
+          [(ngModel)]="pokemon.name"
+          autocomplete="off"
+          name="search"
+        />
+        <button>Pesquisar</button>
+      </div>
+    </form>
+  </div>
+</header>

@@ -1,0 +1,31 @@
+<section>
+  <p>
+    Encontramos <b>{{ totalCards }}</b> cartas para você.
+  </p>
+  <div class="row" *ngIf="cards">
+    <div class="col" *ngFor="let card of cards; let total = count" (click)="cardViewer(card)">
+      <div class="card">
+        <div class="card-image" *ngIf="card.images.small">
+          <img [src]="card.images.small" class="w-100" alt="" />
+        </div>
+        <div class="card-title">
+          <span>{{ card.id }}</span>
+          <h4>{{ card.name }}</h4>
+        </div>
+        <p>
+          Tipo: <span *ngFor="let type of card.types">{{ type }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="row" *ngIf="totalCards === 0">
+      <div class="col">
+        <div class="card">
+          <div class="card-title">
+            <h4>Nenhuma carta encontrada</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>

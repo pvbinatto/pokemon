@@ -1,0 +1,68 @@
+<section>
+  <div class="container" *ngIf="pokemon">
+    <p class="breadcrumb">
+      <a [routerLink]="'/'">Home</a> / {{ pokemon.name }}
+    </p>
+    <div class="row">
+      <div class="card-image-viewer">
+        <img [src]="pokemon.images.large" alt="" />
+      </div>
+      <div class="card-info">
+        <div class="title">
+          <h4>{{ pokemon.name }}</h4>
+        </div>
+        <div class="subtitle">
+          <ul>
+            <li>{{ pokemon.supertype }} {{ pokemon.subtypes[0] }}</li>
+            <li class="text-right">
+              <h3><small>HP</small> {{ pokemon.hp }}</h3>
+            </li>
+          </ul>
+        </div>
+        <div class="attack-list">
+          <p class="mb-1"><b>Ataques</b></p>
+          <div class="attack" *ngFor="let attack of pokemon.attacks">
+            <div class="mb-1">
+              <div class="attack-name mt-0">
+                <i>{{ attack.name }}</i>
+              </div>
+            </div>
+            <div class="mb-1" *ngIf="attack.damage">
+              Dano: {{ attack.damage }}
+            </div>
+            <div class="attack-description mb-2">
+              <small> {{ attack.text }}</small>
+            </div>
+          </div>
+        </div>
+        <div class="features">
+          <ul>
+            <li>
+              <b>Fraquezas</b>:
+              <p *ngIf="pokemon.weaknesses">
+                <span *ngFor="let weakness of pokemon.weaknesses; let c = count"
+                  >{{ weakness.type }} {{ weakness.value }}</span
+                >
+              </p>
+              <p *ngIf="!pokemon.weaknesses">
+                <span>N/A</span>
+              </p>
+            </li>
+            <li>
+              <b>Resistência</b>:
+              <p *ngIf="pokemon.resistances">
+                <span
+                  *ngFor="let resistances of pokemon.resistances; let c = count"
+                  >{{ resistances.type }} {{ resistances.value }}</span
+                >
+              </p>
+              <p *ngIf="!pokemon.resistances">
+                <span>N/A</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
