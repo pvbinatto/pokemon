@@ -1,27 +1,31 @@
 # Pokemon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+Projeto desenvolvido com [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
 
-## Development server
+## Objetivo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Prova para processo seletivo iBlue Consulting
 
-## Code scaffolding
+## Licença
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Utilizada a API Pública [Pokémon TCG](https://dev.pokemontcg.io/)
 
-## Build
+## Home
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Desenvolvida para trazer algumas cartas ordenado por nome
 
-## Running unit tests
+## Home getPokemonsByName
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Retorna o resultado da pesquisa por nome
 
-## Running end-to-end tests
+## cards/:id
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Mostra a rota com a carta que foi escolhida na home. Elementos apresentados conforme solicitado
 
-## Further help
+## SCSS / CSS
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Todo o projeto foi realizado sem nenhum framework de CSS como (Bootstrap). 
+
+## Tests Unit / e2e
+
+Alguns testes implementados para validas as consultas da api.
