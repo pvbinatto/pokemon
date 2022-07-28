@@ -8,13 +8,17 @@ import { ApiServicesService } from 'src/app/services/api-services.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private cardService: ApiServicesService, private router: Router) {}
-
+  constructor(
+    private cardService: ApiServicesService,
+    private router: Router
+  ) {}
+  title: string = 'Pokemons';
   cards: any;
   totalCards: number | undefined;
+  isLoading = false;
 
-  async getPokemons() {
-    return await this.cardService.getPokemons();
+  getPokemons() {
+    return this.cardService.getPokemons();
   }
 
   cardViewer(card: any) {
@@ -22,16 +26,39 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPokemons().then((data: any) => {
+
+    this.isLoading = true;
+
+    this.getPokemons().subscribe((data: any) => {
       this.cards = data.data;
       this.totalCards = data.totalCount;
+      this.isLoading = false;
     });
 
     ApiServicesService.sendedTerm.subscribe((term: any) => {
-      this.cardService.getPokemonsByName(term).then((data: any) => {
-        this.cards = data.data;
-        this.totalCards = data.totalCount;
-      });
+      if (term) {
+        this.cardService.getPokemonsByName(term).subscribe(
+          (data: any) => {
+            this.isLoading = false;
+            this.cards = data.data;
+            this.totalCards = data.totalCount;
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+      } else {
+        this.getPokemons().subscribe(
+          (data: any) => {
+            this.isLoading = false;
+            this.cards = data.data;
+            this.totalCards = data.totalCount;
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+      }
     });
   }
 }

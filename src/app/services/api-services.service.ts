@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,7 +21,6 @@ export class ApiServicesService {
   static sendedTerm = new EventEmitter();
 
   setTerm(term: string) {
-    console.log(term);
     this.searchTerm = term;
     this.sendSearchTerm.emit(this.searchTerm);
     ApiServicesService.sendedTerm.emit(this.searchTerm);
@@ -30,27 +30,24 @@ export class ApiServicesService {
     return this.searchTerm;
   }
 
-  async getPokemons() {
-    const result = await this.http
+  getPokemons(): Observable<any> {
+    const result = this.http
       .get<any>(
         `${environment.apiUrl}/cards/?orderBY=name&pageSize=24`,
         this.getHeaders()
-      )
-      .toPromise();
+      );
     return result;
   }
 
-  async getPokemonsById(cardId: any) {
-    const result = await this.http
-      .get<any>(`${environment.apiUrl}/cards/${cardId}`, this.getHeaders())
-      .toPromise();
+  getPokemonsById(cardId: any): Observable<any> {
+    const result = this.http
+      .get<any>(`${environment.apiUrl}/cards/${cardId}`, this.getHeaders());
     return result;
   }
 
-  async getPokemonsByName(name: string) {
-    const result = await this.http
-      .get<any>(`${environment.apiUrl}/cards?q=name:${name}`, this.getHeaders())
-      .toPromise();
+  getPokemonsByName(name: string): Observable<any> {
+    const result = this.http
+      .get<any>(`${environment.apiUrl}/cards?q=name:${name}`, this.getHeaders());
     return result;
   }
 }

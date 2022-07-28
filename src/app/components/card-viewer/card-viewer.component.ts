@@ -15,16 +15,16 @@ export class CardViewerComponent implements OnInit {
 
   pokemon: any;
   id = this.route.snapshot.paramMap.get('id');
-  async getPokemonsById(cardId: any) {
-    return await this.cardService.getPokemonsById(cardId);
+  getPokemonsById(cardId: any) {
+    return this.cardService.getPokemonsById(cardId);
   }
 
-  async getPokemonsByName(name: string) {
-    return await this.cardService.getPokemonsByName(name);
+  getPokemonsByName(name: string) {
+    return this.cardService.getPokemonsByName(name);
   }
 
   ngOnInit(): void {
-    this.getPokemonsById(this.id).then((data: any) => {
+    this.getPokemonsById(this.id).subscribe((data: any) => {
       this.pokemon = data.data;
       console.log(this.pokemon);
     });

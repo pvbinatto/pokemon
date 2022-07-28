@@ -5,6 +5,7 @@ import { ApiServicesService } from 'src/app/services/api-services.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [ApiServicesService],
 })
 export class HeaderComponent implements OnInit {
   constructor(private cardService: ApiServicesService) {}
@@ -13,11 +14,13 @@ export class HeaderComponent implements OnInit {
     name: '',
   };
 
+  searchTerm: string = 'Faça sua pesquisa aqui';
+
   cards: any;
   totalCards: number | undefined;
 
-  async getPokemonsByName(name: string) {
-    return await this.cardService.getPokemonsByName(name);
+  getPokemonsByName(name: string) {
+    return this.cardService.getPokemonsByName(name);
   }
 
   title = 'Cartas Pokémon';
@@ -30,15 +33,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onSubmit() {
-
-    if (this.pokemon.name) {
-      console.log(this.pokemon.name);
-      this.setTerm(this.pokemon.name);
-      // this.getPokemonsByName(this.pokemon.name).then((data: any) => {
-      //   this.cards = data.data;
-      //   this.totalCards = data.totalCount;
-      //   console.log(this.cards);
-      // });
-    }
+    this.setTerm(this.searchTerm);
   }
 }

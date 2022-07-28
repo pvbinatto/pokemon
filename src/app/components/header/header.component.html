@@ -4,11 +4,13 @@
       {{ title }}
     </div>
     <div class="subtitle">{{ subtitle }}</div>
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <form (ngSubmit)="onSubmit()">
       <div class="search-bar">
         <input
-          type="text"
-          [(ngModel)]="pokemon.name"
+          type="search"
+          onfocus="this.value = '';"
+          onblur="this.value = (this.value === '') ? 'Faça sua pesquisa aqui' : '';"
+          [(ngModel)]="searchTerm"
           autocomplete="off"
           name="search"
         />

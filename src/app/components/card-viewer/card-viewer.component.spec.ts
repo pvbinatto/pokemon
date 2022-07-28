@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ApiServicesService } from 'src/app/services/api-services.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CardViewerComponent } from './card-viewer.component';
 
@@ -8,7 +12,8 @@ describe('CardViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardViewerComponent ]
+      declarations: [ CardViewerComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
     })
     .compileComponents();
 
